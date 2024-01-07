@@ -1,0 +1,15 @@
+from django.urls import path
+
+from .views import TaskView , TaskDetail , TaskCreate , TaskUpdate , TaskDelete , CustomLoginView , RegisterPage
+from django.contrib.auth.views import LogoutView
+urlpatterns = [
+    #while creating url for class based views we need 
+    path('login/' , CustomLoginView.as_view() , name="login"),
+    path('register/' , RegisterPage.as_view() , name="register"),
+    path('logout/' , LogoutView.as_view(next_page = 'login') , name="logout"),
+    path("" , TaskView.as_view() , name="tasks"),
+    path('task/<int:pk>/', TaskDetail.as_view() , name="task"),
+    path('task-create/', TaskCreate.as_view() , name="task-create"),
+    path('task-edit/<int:pk>/', TaskUpdate.as_view() , name="task-edit"),
+    path('task-delete/<int:pk>/', TaskDelete.as_view() , name="task-delete")
+]
